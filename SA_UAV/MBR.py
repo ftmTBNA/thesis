@@ -194,6 +194,8 @@ def Choose_neighbor(numberIOT, numberChannel, point, initial_pos_UAV):
     move = np.zeros((Episode_n))
     matrix = np.zeros((Episode_n, numberIOT, numberChannel))
 
+
+    # TRAJECTORY
     flag_allocation = 1
     iii = 0
     while (flag_allocation and iii < 100):
@@ -213,6 +215,8 @@ def Choose_neighbor(numberIOT, numberChannel, point, initial_pos_UAV):
 
             for n in range(Episode_n):
                 move[n] = point[n][1]
+
+            # Store time slots that the UAV is in boundary in the corresponding list based on direction
             CLR = 0
             CTD = 0
             CFB = 0
@@ -222,7 +226,7 @@ def Choose_neighbor(numberIOT, numberChannel, point, initial_pos_UAV):
             down_f = []
             front_f = []
             back_f = []
-
+            
             for n in range(Episode_n):
                 if move[n] == 1:
                     CLR = CLR + 1
@@ -241,7 +245,7 @@ def Choose_neighbor(numberIOT, numberChannel, point, initial_pos_UAV):
 
                 if move[n] == 6:
                     CFB = CFB - 1
-
+                
                 if CTD == (size_env - start_point) / step_size:
                     top_f.append(n)
                 if CTD == - start_point:
@@ -264,6 +268,7 @@ def Choose_neighbor(numberIOT, numberChannel, point, initial_pos_UAV):
             F = []
             B = []
             S = []
+            # Store each time slot in the corresponding list based on its direction.
 
             for n in range(Episode_n):
                 if move[n] == 0:
@@ -495,6 +500,8 @@ def Choose_neighbor(numberIOT, numberChannel, point, initial_pos_UAV):
             if position[n][0] < 0 or position[n][0] > size_env or position[n][1] < 0 or position[n][1] > size_env or position[n][2] < lb_height or position[n][2] > ub_height:
                 flag_path = True
 
+        
+        # ALLOCATION
         dis_h = np.zeros(numberIOT)
 
         in_coverage = [[]]*Episode_n
@@ -611,11 +618,12 @@ def Choose_neighbor(numberIOT, numberChannel, point, initial_pos_UAV):
             Z = np.sum(np.power(sum_rbe, 2))
 
             if n == 49:
-
+                
                 for i in range(number_RL):
                     a = arrival_R[i]
 
                     b = thr_Rl[i] * Episode_n
+                    # check the allocated bitrate to RT users 
                     if a < b:
 
                         counterr = counter + (b-a)
