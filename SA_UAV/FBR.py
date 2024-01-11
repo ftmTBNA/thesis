@@ -153,7 +153,9 @@ def Uer_Mobilityy(Q_x, Q_y, n_Episode, numberIoT, number_moves, Seed):
 
 def choose_point(numberIOT, numberChannel):
 
-    MMoVVe = np.zeros((Episode_n))
+    MMoVVe = [5, 5, 5, 5, 5, 5, 5, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 0, 0, 0, 0, 0, 0,
+              0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 2, 4, 2, 4, 2, 4, 2, 4, 6, 6, 6, 6, 6, 6, 6]
+
 
     Sls_point = []
     for n in range(Episode_n):
